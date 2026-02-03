@@ -1,0 +1,254 @@
+
+        :root {
+            --bg-color: #000000;
+            --transition-speed: 0.5s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            margin: 0;
+            padding: 0 20px;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+
+        /* Container for the 3D effect */
+        .slider-container {
+            position: relative;
+            width: 50%;
+            height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px; /* Crucial for 3D depth */
+        }
+
+        .slider {
+            position: relative;
+            width: 400px;
+            height: 500px;
+            transform-style: preserve-3d;
+            transition: transform var(--transition-speed) ease-in-out;
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all var(--transition-speed) ease-in-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: #f0f0f0; /* Optional: add background for letterboxing */
+        }
+
+        /* Card Positions */
+        /* Active Card (Center) */
+        .card.active {
+            transform: translate3d(0, 0, 100px);
+            z-index: 10;
+            opacity: 1;
+        }
+
+        /* Left Cards */
+        .card.prev {
+            transform: translate3d(-200px, 0, 0) rotateY(30deg) scale(0.8);
+            z-index: 5;
+            opacity: 0.7;
+            filter: blur(2px);
+        }
+
+        /* Right Cards */
+        .card.next {
+            transform: translate3d(200px, 0, 0) rotateY(-30deg) scale(0.8);
+            z-index: 5;
+            opacity: 0.7;
+            filter: blur(2px);
+        }
+
+        /* Hidden Cards (Far left/right) */
+        .card.hide {
+            transform: translate3d(0, 0, -200px);
+            opacity: 0;
+            z-index: 0;
+        }
+
+        /* Controls */
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            padding: 0 20px;
+            gap: 5px;
+        }
+
+        .btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #333;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.1);
+        }
+
+        /* Snow falling effect */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 20px;
+            pointer-events: none;
+            animation: fall linear infinite;
+            z-index: 1000;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+ body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f4f4f4;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 10px;
+      width: 80%;
+      height: 90vh;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+    .grid-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .grid-container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .scroll-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .scroll-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: white;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+    .scroll-btn:hover {
+      background: #f0f0f0;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+    }
+
+    /* Responsive adjustments for images */
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        width: 45%;
+        height: 70vh;
+      }
+      .slider-container {
+        width: 50%;
+      }
+      .card {
+        width: 90%;
+        height: 450px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .grid-container {
+        grid-template-columns: repeat(1, 1fr);
+        width: 50%;
+        height: 80vh;
+      }
+      .slider-container {
+        width: 45%;
+      }
+      .card {
+        width: 80%;
+        height: 400px;
+      }
+      body {
+        flex-direction: column;
+        padding: 10px;
+      }
+      .slider-container, .grid-container {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
